@@ -25,15 +25,7 @@ const getAll = async () => {
 const getId = async (id) => {
   const [[product]] = await connection.execute('SELECT * FROM products WHERE id=?',
     [id]);
-  // if (product.length === 0) {
-  //   return null;
-  // }
   return product;
-  // const { name } = product.map(seializer)[0];
-  // return getNewProducts({
-  //   id,
-  //   name,
-  // });
 };
 
 module.exports = { getAll, getId };

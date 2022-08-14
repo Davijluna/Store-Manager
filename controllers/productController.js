@@ -1,7 +1,5 @@
 const productServices = require('../services/productServices');
 
-// const error = { code: 500, message: 'serve error' };
-
 const getAll = async (_req, res, next) => {
   try {
     const resultado = await productServices.getAll();
