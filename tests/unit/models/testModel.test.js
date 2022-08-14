@@ -3,6 +3,10 @@ const { expect } = require('chai');
 
 const productModels = require('../../../models/productModels');
 
+const MovieModel = {
+  create: () => {}
+};
+
 describe('Teste model responsavel pela estrutura dos dados', () => {
   describe('Caso OK', () => {
     const product = [
@@ -14,5 +18,10 @@ describe('Teste model responsavel pela estrutura dos dados', () => {
       const resultado = await productModels.getAll()
       expect(resultado).to.be.an(product);
     });
+
+    it('Que objeto possui o "id"', async () => {
+      const resultado = await productModels.getId()
+      expect(resultado).to.have.a.property('id');
+    })
   });
 });
