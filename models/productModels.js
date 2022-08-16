@@ -1,22 +1,6 @@
 const connection = require('./connection');
 
-// const getNewProducts = ({ id, name }) => {
-//   const fullName = [id, name].filter((productor) => productor).join(" ");
-//   return {
-//     id,
-//     name,
-//     fullName,
-//   };
-// }
-
-// const seializer = (prosuctsData) => {
-//   return {
-//     id: prosuctsData.id,
-//     name: prosuctsData.name,
-//   }
-
-// }
-
+// getAll e getId requisito 1
 const getAll = async () => {
   const [product] = await connection.execute('SELECT * FROM StoreManager.products');
   return product;
@@ -25,7 +9,30 @@ const getAll = async () => {
 const getId = async (id) => {
   const [[product]] = await connection.execute('SELECT * FROM products WHERE id=?',
     [id]);
+  
   return product;
 };
 
-module.exports = { getAll, getId };
+// requisito 3
+const NewProducts = async (name) => {
+  // const { name } = req.body;
+
+  const [result] = await connection
+  .execute('INSERT INTO StoreManager.products (name) VALUES (?)', [name]);
+  // const [result] = await connection
+  // .execute('SELECT id, name FROM StoreManager.products ORDER BY id DESC LIMIT 1');
+  return { id: result.insertId, name };
+};
+
+// requisito 4
+// const validProduct = async (prosuctsData) => {
+//   const [result] = await connection.execute('')
+
+// }
+
+// const seializer = (prosuctsData) => ({
+//     id: prosuctsData.id,
+//     name: prosuctsData.name,
+//   });
+
+module.exports = { getAll, getId, NewProducts };
