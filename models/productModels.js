@@ -20,31 +20,35 @@ const NewProducts = async (name) => {
   return { id: result.insertId, name };
 };
 
-// requisito 4
-// const updateProducto = async () => {
-//   const [result] = await connection.execute('UPDATE StoreManager.products SET name = ? WHERE id = ?');
-// };
-
-// requisito 4
-// este modelo de estrutura foi retirado da aula 23.3 da tuma 19 B
-const DeletProductor = async (req, res) => {
-  const id = Number(req.params.id);
-  const sql = 'DELETE FROM StoreManager.products WHERE id = ?;';
-  const result = await connection.execute(sql, [id]);
-  const status = result[0];
-  const { affectedRows } = status;
-  if (affectedRows) return res.status(204);
-  res.status(404).json({ message: 'Product not found' });
+// requisito 12
+const DeletProductor = async (id) => {
+  await connection.execute('DELETE FROM StoreManager.products WHERE id = ?', [id]);
 };
+
+// requisito 12
+// este modelo de estrutura foi retirado da aula 23.3 da tuma 19 B
+// const Delet = async (req, res) => {
+//   const id = Number(req.params.id);
+//   const sql = 'DELETE FROM products WHERE id = ?;';
+//   const result = await connection.execute(sql, [id]);
+//   const status = result[0];
+//   const { affectedRows } = status;
+//   if (affectedRows < 0) return res.status(204); 
+//   res.status(404).json({ message: 'Product not found' });
+// };
 //
 // const validProduct = async (prosuctsData) => {
-//   const [result] = await connection.execute('')
+  //   const [result] = await connection.execute('')
 
-// }
+  // }
 
-// const seializer = (prosuctsData) => ({
+  // const seializer = (prosuctsData) => ({
 //     id: prosuctsData.id,
 //     name: prosuctsData.name,
 //   });
 
+// requisito 4
+// const updateProducto = async () => {
+//   const [result] = await connection.execute('UPDATE StoreManager.products SET name = ? WHERE id = ?');
+// };
 module.exports = { getAll, getId, NewProducts, DeletProductor };

@@ -18,7 +18,7 @@ const getId = async ({ id }) => {
 
 const NewProducts = async (body) => {
   const { name } = body;
-  
+
   if (!name) {
  return {
     error: { message: '"name" is required' }, code: 400,
@@ -34,4 +34,13 @@ const NewProducts = async (body) => {
   return { data: result, code: 201 };
 };
 
-module.exports = { getAll, getId, NewProducts };
+const DeletProductor = async ({ id }) => {
+  const result = await productModels.getId(id);
+  if (!result) {
+    return { error: { message: 'Product not found' }, code: 404 };
+  } 
+  await productModels.DeletProductor(id);
+    return { code: 204 };
+};
+
+module.exports = { getAll, getId, NewProducts, DeletProductor };

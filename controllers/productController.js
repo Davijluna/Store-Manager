@@ -20,7 +20,7 @@ const NewProducts = async (req, res) => {
 
 const DeletProductor = async (req, res) => {
   const { data, error, code } = await productServices.DeletProductor(req.params);
-  if (error) return res.status(code);
+  if (error) return res.status(code).json(error);
   return res.status(code).json(data);
 };
 
