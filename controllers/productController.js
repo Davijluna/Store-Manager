@@ -18,6 +18,12 @@ const NewProducts = async (req, res) => {
   return res.status(code).json(data);
 };
 
+const DeletProductor = async (req, res) => {
+  const { data, error, code } = await productServices.DeletProductor(req.params);
+  if (error) return res.status(code);
+  return res.status(code).json(data);
+};
+
 // const { id } = req.params;
 //   const resultado = await productServices.getId(id);
 //   if (!resultado) {
@@ -31,6 +37,6 @@ const NewProducts = async (req, res) => {
 //   if (!name) {
 //     return { code: 400, message: { message: '"name" not definit' } };
 //   }
-// const result = await productServices.NewProducts(name);
+// const result = await productServices.NewProducts(name);i 
 // return { code: 201, message: result[0] };
-module.exports = { getAll, getId, NewProducts };
+module.exports = { getAll, getId, NewProducts, DeletProductor };

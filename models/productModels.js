@@ -15,16 +15,28 @@ const getId = async (id) => {
 
 // requisito 3
 const NewProducts = async (name) => {
-  // const { name } = req.body;
-
   const [result] = await connection
   .execute('INSERT INTO StoreManager.products (name) VALUES (?)', [name]);
-  // const [result] = await connection
-  // .execute('SELECT id, name FROM StoreManager.products ORDER BY id DESC LIMIT 1');
   return { id: result.insertId, name };
 };
 
 // requisito 4
+// const updateProducto = async () => {
+//   const [result] = await connection.execute('UPDATE StoreManager.products SET name = ? WHERE id = ?');
+// };
+
+// requisito 4
+// este modelo de estrutura foi retirado da aula 23.3 da tuma 19 B
+const DeletProductor = async (req, res) => {
+  const id = Number(req.params.id);
+  const sql = 'DELETE FROM StoreManager.products WHERE id = ?;';
+  const result = await connection.execute(sql, [id]);
+  const status = result[0];
+  const { affectedRows } = status;
+  if (affectedRows) return res.status(204);
+  res.status(404).json({ message: 'Product not found' });
+};
+//
 // const validProduct = async (prosuctsData) => {
 //   const [result] = await connection.execute('')
 
@@ -35,4 +47,4 @@ const NewProducts = async (name) => {
 //     name: prosuctsData.name,
 //   });
 
-module.exports = { getAll, getId, NewProducts };
+module.exports = { getAll, getId, NewProducts, DeletProductor };

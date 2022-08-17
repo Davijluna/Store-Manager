@@ -18,9 +18,10 @@ const getId = async ({ id }) => {
 
 const NewProducts = async (body) => {
   const { name } = body;
+  
   if (!name) {
  return {
-    error: { message: '"name"  is required' }, code: 400,
+    error: { message: '"name" is required' }, code: 400,
     }; 
   }
   if (name.length < 5) {

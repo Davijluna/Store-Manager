@@ -11,6 +11,8 @@ app.get('/products/:id', productFunctions.getId);
 
 app.post('/products', productFunctions.NewProducts);
 
+app.delete('/products/:id', productFunctions.DeletProductor);
+
 // não altere esse arquivo, essa estrutura é necessária para à avaliação do projeto
 
 app.use((err, _req, res, _next) => {
