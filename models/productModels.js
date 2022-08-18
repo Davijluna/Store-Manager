@@ -31,26 +31,13 @@ const ValidCadastryProducts = async (idSales, { idProductor, quantidade }) => {
 const UpdataProductos = async (name, id) => {
   await connection
     .execute('UPDATE StoreManager.products SET name = ? WHERE id = ? ', [name, id]);
+  return 'davi';
 };
 
 // requisito 12
 const DeletProductor = async (id) => {
   await connection.execute('DELETE FROM StoreManager.products WHERE id = ?', [id]);
 };
-// const validProduct = async (prosuctsData) => {
-  //   const [result] = await connection.execute('')
-
-  // }
-
-  // const seializer = (prosuctsData) => ({
-//     id: prosuctsData.id,
-//     name: prosuctsData.name,
-//   });
-
-// requisito 4
-// const updateProducto = async () => {
-//   const [result] = await connection.execute('UPDATE StoreManager.products SET name = ? WHERE id = ?');
-// };
 module.exports = {
   getAll,
   getId,
