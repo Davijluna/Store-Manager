@@ -11,7 +11,7 @@ const getAll = async () => {
   return { data: result, code: 200 };
 };
 
-// requisito 1 B
+// requisito 1 B 
 const getId = async ({ id }) => {
   const result = await productModels.getId(id);
   return { data: result, code: 200 };
@@ -19,18 +19,6 @@ const getId = async ({ id }) => {
 
 const NewProducts = async (body) => {
   const { name } = body;
-  
-  if (!name) {
- return {
-    error: { message: '"name" is required' }, code: 400,
-    }; 
-  }
-  if (name.length < 5) {
-    return {
-      error: { message: '"name" length must be at least 5 characters long' },
-      code: 422,
-    };
-  }
   const result = await productModels.NewProducts(name);
   return { data: result, code: 201 };
 };

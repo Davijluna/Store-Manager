@@ -42,21 +42,6 @@ const DeletProductor = async (req, res) => {
   return res.status(code).json(data);
 };
 
-// const { id } = req.params;
-//   const resultado = await productServices.getId(id);
-//   if (!resultado) {
-//     return res.status(404)
-//       .json({ message: 'Product not found' });
-// }
-//  res.status(200).json(resultado);
-// } catch (erro) {
-//   next('error');
-// }
-//   if (!name) {
-//     return { code: 400, message: { message: '"name" not definit' } };
-//   }
-// const result = await productServices.NewProducts(name);i 
-// return { code: 201, message: result[0] };
 module.exports = {
   getAll,
   getId,

@@ -1,10 +1,11 @@
 const { describe } = require('mocha');
 const { expect } = require('chai');
 const Sinon = require('sinon')
+const sinon = require('sinon')
 const connection = require('../../../models/connection')
 
 const productModels = require('../../../models/productModels');
-const { object } = require('joi');
+// const { object } = require('joi');
 describe('Teste model responsavel pela estrutura dos dados', () => {
   describe('testando a função getAll', () => {
     const product = [
@@ -45,6 +46,30 @@ describe('Teste model responsavel pela estrutura dos dados', () => {
       expect(resultado.id).to.be.eq(1);
       expect(resultado.name).to.be.eq('Martelo de Thor');
     })
+  });
+
+  describe('testa função NewProducts', () => {
+    const product = [
+      {
+        id: 4,
+        "name": "ProdutoX"
+      },
+    ];
+    before(() => {
+      Sinon.stub(connection, 'execute').resolves(product)
+    })
+    after(() => {
+      connection.execute.restore()
+    })
+    it('testando se NewProducts cadastra um novo produto', async () => {
+      const resultado = await productModels.NewProducts('nome')
+      expect(resultado).to.be.a('object');
+      expect(resultado).to.have.keys('id', 'name');
+      // expect(resultado.id).to.be.eq(undefined);
+      expect(resultado.name).to.be.eq('nome');
+    })
+  })
+});
     // describe('testando a função getId', () => {
     //   before(() => {
     //   const product = [
@@ -62,7 +87,6 @@ describe('Teste model responsavel pela estrutura dos dados', () => {
     //     expect(resultado).to.be.an('id')
     //   })
     // })
-  });
   // describe('testtando função getId', () => {
   //   
   //   // const result = [];
@@ -72,4 +96,3 @@ describe('Teste model responsavel pela estrutura dos dados', () => {
   //     expect(resultado).to.be.an(product);
   //   });
   // });
-});

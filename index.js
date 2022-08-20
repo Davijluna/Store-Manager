@@ -10,15 +10,23 @@ const {
   nameProductLength,
 } = require('./middlewares/functionValidation');
 
-app.get('/products', productFunctions.getAll);
+app.get('/products',
+  productFunctions.getAll);
 
-app.get('/products/:id', validyProduct, productFunctions.getId);
+app.get('/products/:id',
+  validyProduct,
+  productFunctions.getId);
 
-app.post('/products', productFunctions.NewProducts);
+app.post('/products',
+  nameValidation,
+  nameProductLength,
+  productFunctions.NewProducts);
 
-app.delete('/products/:id', productFunctions.DeletProductor);
+app.delete('/products/:id',
+  productFunctions.DeletProductor);
 
-app.post('/sales', productFunctions.ValidCadastryProducts);
+app.post('/sales',
+  productFunctions.ValidCadastryProducts);
 
 app.put('/products/:id',
   nameValidation,
